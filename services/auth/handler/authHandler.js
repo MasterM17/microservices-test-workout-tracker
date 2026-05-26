@@ -74,6 +74,14 @@ const login = async (req, res) => {
   }
 };
 
+const logout = (req, res) => {
+  res.cookie("jwt", "loggedout", {
+    expires: new Date(Date.now() + 10 * 1000), // expires in 10 seconds
+    httpOnly: true,
+  });
+  res.status(200).json({ status: "success" });
+};
+
 const forgotPassword = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -202,4 +210,5 @@ module.exports = {
   restrict,
   forgotPassword,
   resetPassword,
+  logout,
 };

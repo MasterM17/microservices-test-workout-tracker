@@ -55,6 +55,8 @@ app.use(
   "/api/v1/resetPassword",
   createServiceProxy("http://localhost:3501", "/api/v1/resetPassword"),
 );
+app.use("/api/v1/logout", createServiceProxy("http://localhost:3501", "/api/v1/logout"));
+
 // WORKOUT paths
 
 app.use(

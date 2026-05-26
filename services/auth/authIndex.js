@@ -19,10 +19,9 @@ app.post("/api/v1/signup", auth.signup);
 app.post("/api/v1/login", auth.login);
 app.post("/api/v1/forgotPassword", auth.forgotPassword);
 app.patch("/api/v1/resetPassword/:token", auth.resetPassword);
+app.post("/api/v1/auth/logout", auth.logout);
 
-
-
-const port = process.env.PORTAUTH
+const port = process.env.PORTAUTH;
 
 app.listen(port, (err) => {
   if (err) {
