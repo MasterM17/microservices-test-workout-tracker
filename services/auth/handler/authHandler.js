@@ -76,10 +76,11 @@ const login = async (req, res) => {
 
 const logout = (req, res) => {
   res.cookie("jwt", "loggedout", {
-    expires: new Date(Date.now() + 10 * 1000), // expires in 10 seconds
+    expires: new Date(Date.now() + 500), // expires in half a second
     httpOnly: true,
   });
-  res.status(200).json({ status: "success" });
+
+  res.status(200).json({ status: "success", message: "Cookie cleared" });
 };
 
 const forgotPassword = async (req, res) => {

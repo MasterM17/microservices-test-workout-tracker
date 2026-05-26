@@ -1,5 +1,7 @@
+import axios from "axios";
 import { logInFail, logOutUser, logInSuccess } from "./actions";
 import { LogInUser } from "./../../../api/authApi";
+import { api } from "../../../config/properties";
 
 export const logIntoApp = (requestParams) => {
   return async (dispatch) => {
@@ -18,11 +20,20 @@ export const logIntoApp = (requestParams) => {
 };
 
 export const logoutUser = () => {
-  return (dispatch) => {
-    //  Wipe the persistent token from browser storage
-    localStorage.removeItem("token");
-
-    // Clear the token and user data out of the Redux state
-    dispatch(logOutUser());
+  return async (dispatch) => {
+    try {
+      // Tell backend to clear the HttpOnly cookie
+      await axios.post(
+        `${api.localRoute}/api/v1/logout`,
+        {},
+        { withCredentials: true },
+      );
+    } catch (err) {
+      console.log("Logout proxy request failed:", err.message);
+    } finally {
+      // clear frontend trace,
+      localStorage.removeItem("token");
+      dispatch(logOutUser());
+    }
   };
 };

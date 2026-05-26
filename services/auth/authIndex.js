@@ -19,7 +19,7 @@ app.post("/api/v1/signup", auth.signup);
 app.post("/api/v1/login", auth.login);
 app.post("/api/v1/forgotPassword", auth.forgotPassword);
 app.patch("/api/v1/resetPassword/:token", auth.resetPassword);
-app.post("/api/v1/auth/logout", auth.logout);
+app.post("/api/v1/logout", auth.logout);
 
 const port = process.env.PORTAUTH;
 
